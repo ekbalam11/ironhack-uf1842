@@ -1,15 +1,19 @@
-// ¿En tu páis de origen es normal dejar propina?
-
-const bill = document.querySelector('#bill-amount');
-const percetangeTip = document.querySelector('#percetage-tip');
-const totalTip = document.querySelector('#tip-amount');
-const totalBill = document.querySelector('#total');
+// ¿En tu páis de origen es normal dejar propina? sí, suele ser del 10% y casi obligatorio.
 const button = document.querySelector('#calculate');
 
-function totalBill
+//Crear una función para calcular la propina
+function calculateTip(){
+    const bill = parseFloat(document.querySelector('#bill-amount').value);
+    const percentageTip = document.querySelector('#percentage-tip').value;
+    const tipAmount = (bill *(percentageTip / 100));
+    const totalAmount = (bill + parseFloat(tipAmount));    
+    document.querySelector('#tip-amount').value = tipAmount.toFixed(2);
+    document.querySelector('#total').value = totalAmount.toFixed(2);
+    document.querySelector('#tip-amount').disabled = false;
+    document.querySelector('#total').disabled = false;
+    return;
+}
+
+button.addEventListener('click', calculateTip);
 
 
-button.addEventListener('click', () => {
-    let div = document.querySelector('#total');
-    div.innertext = bill.value;
-})
