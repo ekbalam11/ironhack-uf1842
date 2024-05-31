@@ -11,7 +11,7 @@
 <body>
     <h1>Gráfico de Barras con Chart.js</h1>
     <main style="width: 30%; margin: 0 auto">
-        <canvas id="myBarChart" width="800px" height="700px"></canvas>
+        <canvas id="myBarChart" width="900px" height="900px"></canvas>
     </main>
     <script>
         const data = {
@@ -27,11 +27,8 @@
                 ],
                 borderWidth: 0,
                 label: "Consumo de fruta por persona"
-
             }]
         };
-        
-        // Configuración del gráfico
         const config = {
             type: 'bar',
             data: data,
@@ -45,7 +42,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'bottom',
+                        position: 'bottom'
                     },
                     title: {
                         display: true,
@@ -53,19 +50,19 @@
                     },
                     tooltip: {
                         callbacks: {
-                            label: function (tooltipItem){ 
-                                const production = tooltipItem.raw;
-                                const label = tooltipItem.label;
-                                let message = `${label}: ${production} kg`;
-                                if (production > 8) {
-                                    message += 'Producción insuficiente';
-                                }
-                                labels[3] += message;
-                                // for (let i = 0; i < data.length; i++) {
-                                //     if (data[i] > 8) {
-                                //        console.log("Producción insuficiente")};
-                                // const message = `${tooltipItem.label}: ${tooltipItem.raw} kg`;
+                         afterLabel: function(tooltipItem) {
+                            // Raw data values for the given `dataIndex` and `datasetIndex
+                            const production = tooltipItem.raw;
+                            // Label for the tooltip
+                            const label = tooltipItem.label;
+                            let message = "";
+                            if (production > 8) {
+                                message += ' - Producción insuficiente!';
+                            } else if ( production <= 8) {
+                                message += ' - Producción suficiente';
                             }
+                            return message;
+                         }
                         }
                     }
                 }
